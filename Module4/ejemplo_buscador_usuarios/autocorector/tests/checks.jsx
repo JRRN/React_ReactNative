@@ -1,7 +1,7 @@
 import {render, fireEvent, waitFor, act} from '@testing-library/react'
 import App from '../../src/App';
-import Header from '../../src/Header';
-import Resultados from '../../src/Resultados';
+import Header from '../../src/Header/Header';
+import Resultados from '../../src/Resultados/Resultados';
 import user_info from '../../user.json';
 import {mockdata} from "../utils/users.js";
 
@@ -49,6 +49,7 @@ test(JSON.stringify(testinfo), () => {
   expect(user_info).toHaveProperty('name');
   expect(user_info).toHaveProperty('email');
   expect(user_info).toHaveProperty('token');
+  console.log(user_info.name);
   expect(mensaje).toHaveTextContent(new RegExp(user_info.name, 'i'));
   expect(cabecera.tagName).toBe('DIV');
   expect(cabecera).toContainElement(logo);

@@ -4,7 +4,7 @@
   "private": true,
   "disableHashCheck": false,
   "usejest": true,
-  "devLogs": false,
+  "devLogs": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
