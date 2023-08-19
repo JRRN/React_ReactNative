@@ -35,7 +35,6 @@ function App() {
     setTurn(turn === PLAYERX ? PLAYER0 : PLAYERX);
     setValues(valuesCopy);
     setMoves(moves + 1)
-    //checkWinner()
   }
 
   function resetClick() {

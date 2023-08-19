@@ -1,6 +1,8 @@
+import {Button} from '@nextui-org/button';
+
 export default function LoadGame(props: { loadClick: () => void }): JSX.Element {
-    return <button
+    return <Button
         onClick={props.loadClick}>
         Load Game
-    </button>
+    </Button>
 }
