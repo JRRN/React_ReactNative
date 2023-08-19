@@ -3,5 +3,9 @@ const squareStyle = {
 }
 
 export default function Square(props) {
-    return <button style={squareStyle} key={props.keyValue}>{props.value}</button>
+    return <button
+        style={squareStyle}
+        onClick={() => props.appClick(props.rowIndex, props.columnIndex)}
+        key={props.rowIndex + '-' + props.columnIndex}>{props.value}
+    </button>
 }
