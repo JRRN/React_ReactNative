@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useState } from "react";
+import Header from './Components/Header/Header';
+import Board from './Components/Board/Board';
 
-function App() {
+const PLAYERX: string = "Player 1 - Xs";
+const PLAYER0: string = "Player 2 - 0s";
+
+function App(): JSX.Element {
+  const [turn, setTurn] = useState<string>(PLAYERX);
+  const [values, setValues] = useState<string[][]>([["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Tic Tac Toe</h2>
+      <Header turn={turn}></Header>
+      <Board values={values}></Board>
     </div>
   );
 }
