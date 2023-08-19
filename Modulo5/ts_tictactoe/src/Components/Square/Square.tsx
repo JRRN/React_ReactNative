@@ -2,10 +2,25 @@ const squareStyle: { height: string, width: string } = {
     height: "100px", width: "100px",
 }
 
-export default function Square(props: { appClick: (rowIndex: number, columnIndex: number) => void, rowIndex: number, columnIndex: number, value: string }) {
+interface SquareProps {
+    value: string;
+    rowIndex: number;
+    columnIndex: number;
+    appClick: (rowIndex: number, columnIndex: number) => void;
+}
+
+export default function Square(props: SquareProps): JSX.Element {
+
+    function GuardClick(): void {
+        if (props.value === '-') {
+            props.appClick(props.rowIndex, props.columnIndex)
+        }
+    }
+
     return <button
         style={squareStyle}
-        onClick={() => props.appClick(props.rowIndex, props.columnIndex)}
+        onClick={GuardClick}
+        className={props.value === '-' ? "clickable" : "blocked"}
         key={props.rowIndex + '-' + props.columnIndex}>{props.value}
     </button>
 }

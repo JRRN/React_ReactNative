@@ -3,9 +3,17 @@ const squareStyle = {
 }
 
 export default function Square(props) {
+
+    function GuardClick() {
+        if (props.value === '-') {
+            props.appClick(props.rowIndex, props.columnIndex)
+        } 
+    }
+
     return <button
         style={squareStyle}
-        onClick={() => props.appClick(props.rowIndex, props.columnIndex)}
+        onClick={GuardClick}
+        className={props.value === '-' ? "clickable" : "blocked"}
         key={props.rowIndex + '-' + props.columnIndex}>{props.value}
     </button>
 }
