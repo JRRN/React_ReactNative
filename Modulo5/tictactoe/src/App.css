@@ -41,6 +41,6 @@
   cursor: pointer;
 }
 
-.blocke {
+.blocked {
   cursor: not-allowed;
 }
