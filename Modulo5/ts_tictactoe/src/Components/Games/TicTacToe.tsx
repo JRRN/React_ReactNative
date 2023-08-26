@@ -1,0 +1,65 @@
+import { useEffect, useState } from "react";
+import Header from "../Header/Header";
+import Board from '../Board/Board';
+import Reset from '../Reset/Reset';
+import LoadGame from '../LoadGame/LoadGame';
+import {Button, ButtonGroup} from "@nextui-org/react";
+
+
+const PLAYERX: string = "Player 1 - Xs";
+const PLAYER0: string = "Player 2 - 0s";
+
+function TicTacToe(): JSX.Element {
+  const [turn, setTurn] = useState<string>(PLAYERX);
+  const [values, setValues] = useState<string[][]>([["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]);
+  const [moves, setMoves] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  async function fetchData(): Promise<void> {
+    const request: Response = await fetch('https://api.npoint.io/c734e05e43c5b87dd971');
+    const response: any = await request.json();
+    setTurn(response.turn);
+    setMoves(response.moves);
+    setValues(response.values);
+    setLoading(false);
+  }
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+
+  function appClick(rowNum: number, columnNum: number): void {
+    let valuesCopy: string[][] = JSON.parse(JSON.stringify(values));
+    let newMovement: string = turn === PLAYERX ? 'X' : '0';
+    valuesCopy[rowNum][columnNum] = newMovement;
+    setTurn(turn === PLAYERX ? PLAYER0 : PLAYERX);
+    setValues(valuesCopy);
+    setMoves(moves + 1)
+  }
+
+  function resetClick(): void {
+    setTurn(PLAYERX);
+    setValues([["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]);
+    setMoves(0);
+  }
+
+
+  return (
+    <div className="App">
+      <h2>Tic Tac Toe</h2>
+      {loading ?
+        <h1>"LOADING"</h1> :
+        <div><Header turn={turn}></Header>
+          <Board values={values} appClick={appClick}></Board>
+          <h3>Número de movimientos: {moves}</h3>
+          <ButtonGroup>
+            <Reset resetClick={resetClick} />
+            <LoadGame loadClick={fetchData} />
+          </ButtonGroup>
+        </div>
+      }
+    </div>
+  );
+}
+
+export default TicTacToe;
